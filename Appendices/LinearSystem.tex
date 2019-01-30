@@ -1,0 +1,128 @@
+\chapter[Solution to Linear System][Solution to Linear System]{Solution to Linear System} \label{ap:SolutionToLinearSystem}
+%
+At first glance, the coupled system of equations given by Eq. \ref{eq:ScatteredFieldEquations} is not simple to solve for the scattered field coefficients, $V_{l, \nu, m}^{X,Y,i,j}$. To clarify the necessary approach, we start by unpacking Eq. \ref{eq:ScatteredFieldEquations} into all the equations it provides. We fix values of $m$, $i$, and $j$ and generate equations from all possible combinations of $X=M$ or $N$, $Y = M$ or $N$. We obtain
+%
+\begin{subequations}
+\begin{align}
+V_{l, \nu, m}^{M,M,i,j}
+- \sum_{p=1}^{N_{s}} \sum_{n = \widetilde{m}}^{\infty}
+\left[ \begin{array}{r}
+V_{l,n,m}^{M,M,p,j} \widetilde{R}_{n}^{(M)}(\rho_{p}) C_{n,\nu,m}^{M,M,i,p}
+\\
++ V_{l,n,m}^{N,M,p,j} \widetilde{R}_{n}^{(N)}(\rho_{p}) C_{n,\nu,m}^{M,N,i,p}
+\end{array} \right]
+&= C_{l, \nu, m}^{M,M,i,j}
+\\
+V_{l, \nu, m}^{N,M,i,j}
+- \sum_{p=1}^{N_{s}} \sum_{n = \widetilde{m}}^{\infty}
+\left[ \begin{array}{r}
+V_{l,n,m}^{M,M,p,j} \widetilde{R}_{n}^{(M)}(\rho_{p}) C_{n,\nu,m}^{N,M,i,p}
+\\
++ V_{l,n,m}^{N,M,p,j} \widetilde{R}_{n}^{(N)}(\rho_{p}) C_{n,\nu,m}^{N,N,i,p}
+\end{array} \right]
+&= C_{l, \nu, m}^{N,M,i,j}
+\\
+V_{l, \nu, m}^{M,N,i,j}
+- \sum_{p=1}^{N_{s}} \sum_{n = \widetilde{m}}^{\infty}
+\left[ \begin{array}{r}
+V_{l,n,m}^{M,N,p,j} \widetilde{R}_{n}^{(M)}(\rho_{p}) C_{n,\nu,m}^{M,M,i,p}
+\\
++ V_{l,n,m}^{N,N,p,j} \widetilde{R}_{n}^{(N)}(\rho_{p}) C_{n,\nu,m}^{M,N,i,p}
+\end{array} \right]
+& = C_{l, \nu, m}^{M,N,i,j}
+\\
+V_{l, \nu, m}^{N,N,i,j}
+- \sum_{p=1}^{N_{s}} \sum_{n = \widetilde{m}}^{\infty}
+\left[ \begin{array}{r}
+V_{l,n,m}^{M,N,p,j} \widetilde{R}_{n}^{(M)}(\rho_{p}) C_{n,\nu,m}^{N,M,i,p}
+\\
++ V_{l,n,m}^{N,N,p,j} \widetilde{R}_{n}^{(N)}(\rho_{p}) C_{n,\nu,m}^{N,N,i,p}
+\end{array} \right]
+& = C_{l, \nu, m}^{N,N,i,j}
+\end{align}
+\end{subequations}
+
+In order to solve the linear system numerically, we must truncate the infinite sum to a finite number of terms, which we will denote $N_{\mathrm{max}}$. Additionally, we define $N_{\mathrm{terms}} = N_{\mathrm{max}} - \widetilde{m} + 1$. Now, we define four $N_{\mathrm{terms}} \times N_{\mathrm{terms}}$ matrices of scattered field coefficients: $\overline{\overline{\boldsymbol{V}}}_{m}^{M,M,i,j}$, $\overline{\overline{\boldsymbol{V}}}_{m}^{M,N,i,j}$, $\overline{\overline{\boldsymbol{V}}}_{m}^{N,M,i,j}$, and $\overline{\overline{\boldsymbol{V}}}_{m}^{N,N,i,j}$. Each element in the matrices is a value of $V_{l, \nu, m}^{X,Y,i,j}$ with $l \in [\widetilde{m}, N_{\mathrm{max}}]$ and $\nu \in [\widetilde{m}, N_{\mathrm{max}}]$. The $l$ index increases across rows, and $\nu$ increases down columns. For example, for $m=0$ and $N_{\mathrm{max}}=2$
+%
+\begin{equation}
+\overline{\overline{\boldsymbol{V}}}_{m=0}^{X,Y,i,j} = \left[ \begin{array}{ccc}
+V_{l=1, \nu=1, m=0}^{X,Y,i,j} & V_{l=2, \nu=1, m=0}^{X,Y,i,j} \\
+V_{l=1, \nu=2, m=0}^{X,Y,i,j} & V_{l=2, \nu=2, m=0}^{X,Y,i,j}
+\end{array}\right]
+\end{equation}
+
+Next we define a $(2 N_{\mathrm{terms}}) \times (2 N_{\mathrm{terms}})$ block matrix of coefficients for a given pair of spheres
+\begin{equation}
+\overline{\overline{\boldsymbol{V}}}_{m}^{i,j} = \left[ \begin{array}{c|c}
+\overline{\overline{\boldsymbol{V}}}_{m}^{M,M,i,j} & \overline{\overline{\boldsymbol{V}}}_{m}^{M,N,i,j} \\ \hline
+\overline{\overline{\boldsymbol{V}}}_{m}^{N,M,i,j} & \overline{\overline{\boldsymbol{V}}}_{m}^{N,N,i,j}
+\end{array}\right]
+\end{equation}
+%
+and an even greater $(2 N_{s} N_{\mathrm{terms}}) \times (2 N_{s} N_{\mathrm{terms}})$ block matrix for all pairs of spheres, $\overline{\overline{\boldsymbol{V}}}_{m}$, where the rows of the block matrix have increasing values of $i$ and the rows have increasing values of $j$. For example, for a two sphere system
+\begin{equation}
+\overline{\overline{\boldsymbol{V}}}_{m} = \left[ \begin{array}{c|c}
+\overline{\overline{\boldsymbol{V}}}_{m}^{i=1,j=1} & \overline{\overline{\boldsymbol{V}}}_{m}^{i=1,j=2} \\ \hline
+\overline{\overline{\boldsymbol{V}}}_{m}^{i=2,j=1} & \overline{\overline{\boldsymbol{V}}}_{m}^{i=2,j=2}
+\end{array}\right]
+\end{equation}
+
+Now that the organization of the scattered field coefficients is clear, we move on to the organization of the Mie coefficients. Define a column vector, $\boldsymbol{R}^{j}_{\nu}$, whose entries are $\widetilde{R}^{(M)}_{\nu}(\rho_{j})$ and then $\widetilde{R}^{(M)}_{\nu}(\rho_{j})$, appended together. Only terms for which $\nu \in [\widetilde{m}, N_{\mathrm{max}}]$ are included. For example, for $m=0$ and $N_{\mathrm{max}}=2$
+\begin{equation}
+\boldsymbol{R}^{j}_{m=0} = \left[ \begin{array}{c}
+\widetilde{R}^{(M)}_{\nu=1}(\rho_{j}) \\
+\widetilde{R}^{(M)}_{\nu=2}(\rho_{j}) \\ \hline
+\widetilde{R}^{(N)}_{\nu=1}(\rho_{j}) \\
+\widetilde{R}^{(N)}_{\nu=2}(\rho_{j})
+\end{array}\right]
+\end{equation}
+
+Next, define a Mie coefficient matrix
+\begin{equation}
+\overline{\overline{\boldsymbol{R}}}_{m} =\overline{\overline{\boldsymbol{I}}} \left[ \begin{array}{c}
+\boldsymbol{R}^{j=1}_{m} \\ \hline
+\boldsymbol{R}^{j=2}_{m} \\ \hline
+\vdots \\ \hline
+\boldsymbol{R}^{j=N_{\mathrm{s}}}_{m}
+\end{array}\right]
+\end{equation}
+%
+where $\overline{\overline{\boldsymbol{I}}}$ is an identity matrix with dimensions $(2 N_{s} N_{\mathrm{terms}}) \times (2 N_{s} N_{\mathrm{terms}})$.
+
+The vector addition translation coefficients are first organized into $N_{\mathrm{terms}} \times N_{\mathrm{terms}}$ matrices. Each element in the matrices is a value of the translation coefficient with $l \in [\widetilde{m}, N_{\mathrm{max}}]$ and $\nu \in [\widetilde{m}, N_{\mathrm{max}}]$. The $l$ index increases across rows, and $\nu$ increases down columns. For example, given a pair of spheres $i$ and $j$ and for $m=0$ and $N_{\mathrm{max}}=2$
+%
+\begin{equation}
+\overline{\overline{\boldsymbol{C}}}_{m=0}^{X,Y,i,j} = \left[ \begin{array}{cc}
+C_{l=1,\nu=1,m=0}^{X,Y,i,j} & C_{l=2,\nu=1,m=0}^{X,Y,i,j} \\
+C_{l=1,\nu=2,m=0}^{X,Y,i,j} & C_{l=2,\nu=2,m=0}^{X,Y,i,j}
+\end{array}\right]
+\end{equation}
+
+Next we define a $(2 N_{\mathrm{terms}}) \times (2 N_{\mathrm{terms}})$ block matrix of coefficients for a given pair of spheres
+\begin{equation}
+\overline{\overline{\boldsymbol{C}}}_{m}^{i,j} = \left[ \begin{array}{c|c}
+\overline{\overline{\boldsymbol{C}}}_{m}^{M,M,i,j} & \overline{\overline{\boldsymbol{C}}}_{m}^{M,N,i,j} \\ \hline
+\overline{\overline{\boldsymbol{C}}}_{m}^{N,M,i,j} & \overline{\overline{\boldsymbol{C}}}_{m}^{N,N,i,j}
+\end{array}\right]
+\end{equation}
+%
+and an even greater $(2 N_{s} N_{\mathrm{terms}}) \times (2 N_{s} N_{\mathrm{terms}})$ block matrix for all pairs of spheres, $\overline{\overline{\boldsymbol{C}}}_{m}$, where the rows of the block matrix have increasing values of $i$ and the rows have increasing values of $j$. For example, for a two sphere system
+\begin{equation}
+\overline{\overline{\boldsymbol{C}}}_{m} = \left[ \begin{array}{c|c}
+\overline{\overline{\boldsymbol{C}}}_{m}^{i=1,j=1} & \overline{\overline{\boldsymbol{C}}}_{m}^{i=1,j=2} \\ \hline
+\overline{\overline{\boldsymbol{C}}}_{m}^{i=2,j=1} & \overline{\overline{\boldsymbol{C}}}_{m}^{i=2,j=2}
+\end{array}\right]
+\end{equation}
+
+It is good to note here that, due to the definition of $C_{l, \nu, m}^{X,Y,i,j}$ in Eq. \ref{eq:TranslationCoefficients}, all the matrices on the main diagonal of $\overline{\overline{\boldsymbol{C}}}_{m}$ are identically zero.
+
+The solution to the  linear system is given by
+\begin{equation}\label{eq:LinearSystem_Matrix}
+\begin{split}
+\overline{\overline{\boldsymbol{V}}}_{m} &= \overline{\overline{\boldsymbol{R}}}_{m}^{-1} \left[ \overline{\overline{\boldsymbol{I}}} - \overline{\overline{\boldsymbol{R}}}_{m} \overline{\overline{\boldsymbol{C}}}_{m} \right]^{-1} \overline{\overline{\boldsymbol{R}}}_{m} \overline{\overline{\boldsymbol{C}}}_{m}
+\\
+&= \left[ \overline{\overline{\boldsymbol{I}}} - \overline{\overline{\boldsymbol{C}}}_{m} \overline{\overline{\boldsymbol{R}}}_{m} \right]^{-1} \overline{\overline{\boldsymbol{C}}}_{m}
+\end{split}
+\end{equation}
+
+The second line of Eq. \ref{eq:LinearSystem_Matrix} is the most compact solution for the unknown scattered field coefficients, as defined in this work. The first line is presented in recognition of the fact that other works on light scattering by spheres sometimes define their scattered field coefficients proportional to $\overline{\overline{\boldsymbol{R}}}_{m} \overline{\overline{\boldsymbol{V}}}_{m}$ \cite{Narayanaswamy2008, Mackowski2008}.

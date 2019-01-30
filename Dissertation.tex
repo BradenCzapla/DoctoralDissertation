@@ -1,0 +1,171 @@
+% This is the main document file for the dissertation. You should not include any of your actual chapters or other substantive writing in this file.
+%First we have to set up the style and formatting of the pages.
+
+\documentclass[oneside, letterpaper,12pt]{memoir} %The memoir class is great for longer works that use separate chapters. The Dissertation Office recommends 10-pt Arial or 12-pt Times New Roman. I use 12-pt for readability.
+
+%%% Add the 'oneside' option to the memoir class to remove black pages.
+
+%Below are some LaTeX packages to include to make sure that your Unicode characters render correctly. This is especially important if your dissertation includes polytonic Greek!
+
+\usepackage[hidelinks]{hyperref} % This creates hyperlinks in the table of contents to each section.
+\hypersetup{colorlinks, allcolors=black} % This sets the color of all links to black
+
+\DisemulatePackage{setspace} %You need to use this package for "true MS Word" double-spacing.
+\usepackage{setspace} %Allows you to set different spacing (double, etc.) throughout your writing.
+\usepackage{amsmath}
+\makeatletter
+\def\maketag@@@#1{\hbox{\m@th\normalfont\normalsize#1}}
+\makeatother
+
+
+\usepackage{scalerel}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\K}{\scalerel*{\text{K}}{\sum}}
+
+\renewcommand\cftappendixname{\appendixname~} % Prepends the word "Appendix" to all appendix titles in the toc (as per request of GSAS)
+\settocdepth{subsubsection} % Set depth to show headings in TOC
+\setsecnumdepth{subsubsection} % Set depth to number headings
+
+% \usepackage{hyperref} % Use if you want hyperlinks in your table of contents
+
+%\usepackage{helvet}
+%\setmainfont{Linux Libertine O} %This is a really readable serif font. It renders polytonic Greek better than any other OpenType font I've found, including Times New Roman. I now use it for everything, including class handouts. Highly recommended for classicists.
+
+\usepackage{enumitem} % To fix spacing of bullet point lists
+\setlist{noitemsep} % or \setlist{nosep} for space around whole list
+
+\usepackage{bm}
+\usepackage{amssymb}
+
+\usepackage{multirow}
+\usepackage{mathabx}
+\usepackage{siunitx}
+
+\usepackage{listings}
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+
+\raggedbottom
+
+%Here is some stuff on the bibliography. You want to keep your bibliography file in the same directory as this file.
+
+%\usepackage[american]{babel} %Enables hyphenation and date formats according to American conventions. Change "american" to "british" (or another value) if you work outside the US.
+%\usepackage[backend=bibtex8,style=authoryear-icomp,texencoding=utf8,bibencoding=utf8]{biblatex} %The command here uses biblatex to render your bibliography, and it tells biblatex to use Unicode fonts. You can change the style of your citations easily by changing the value for "style" -- I use authoryear-icomp which takes care of the id/ibid citations automatically. There are many styles available if you want to change it.
+%I have tried to use biber instead of biblatex many times, but it's never worked properly for me. I use biblatex, but feel free to try biber instead. 
+
+\usepackage{url}
+\usepackage[super,comma,sort&compress]{natbib}
+%\usepackage{natbib}
+\bibliographystyle{unsrtnat}
+\usepackage{notoccite} % Keep citations in figure captions in order of appearance
+%\addbibresource{./library.bib}
+%\setlength{\bibitemsep}{\baselineskip} %Skip lines between bibliography entries. Columbia requires that you skip a line between entries.
+
+
+
+%Here you can set margins and other page formatting
+
+\setlrmarginsandblock{3.175cm}{3.175cm}{*} %Left and right margin -- the dissertation office requires at least 1-inch margins
+\setulmarginsandblock{2.54cm}{2.54cm}{*}  %Upper and lower margin -- same thing, at least 1-inch margins
+\checkandfixthelayout %A function of the memoir class that finds the right number of lines per page and apparently tidies up the formatting in other mysterious ways...?
+
+
+
+
+% Below we start to set up the document itself, including how to use spacing throughout the dissertation.
+
+\begin{document}
+
+\sloppy %If I don't include sloppy, then Greek and Latin words screw up margins all over. If you don't include weird languages in your dissertation, you can probably leave this one out.
+\chapterstyle{chappell} % Nice formatting for chapter headings. Check out the documentation for the memoir class for other options.
+\footnotesep\baselineskip % Footnotes need to have a space between each one for Columbia's Dissertation Office. 
+\setstretch{2} %Set line spacing to "true MS Word" double-spacing
+%\DoubleSpace % Use LaTeX double-spacing (more like 1.666 spacing)
+
+\expandafter\def\expandafter\quote\expandafter{\quote\SingleSpace} %Keep all block quotes single-spaced regardless of body text spacing.
+
+\pagestyle{empty} % Front matter should have no page numbers. The \thispage style command only works for a single page, so if your abstract is longer than a page, it will number the second page. Putting this command here stops all page numbers until I use \pagestyle{plain} below.
+
+%% Here's the Title Page
+\include{./FrontMatter/TitlePage} % Done X
+
+%% Here's the copyright page. I use a Creative Commons license.
+\include{./FrontMatter/Copyright} % Done X
+
+%% Here's the Abstract
+\include{./FrontMatter/Abstract} % Done X
+
+\pagestyle{plain} %Put page numbers at the bottom-center for the rest of the dissertation. Columbia's dissertation office requires that the numbers appear at this location on the page throughout the document.
+
+\frontmatter
+\clearpage % As per the dissertation office, an entry for the toc should not appear in the toc itself. By adding these three lines, it will not appear in the toc but a bookmark to the toc will appear a link in the pdf.
+\pdfbookmark{\contentsname}{toc}
+\tableofcontents* % You need to put your ToC after frontmatter so that it will get lowercase Roman numerals.
+
+%A list of graphs and illustrations should go here if you use any.
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+% Acknowledgements
+\include{./FrontMatter/Acknowledgments} % Done X
+
+% Dedication
+\include{./FrontMatter/Dedication}% Done X
+
+
+%What follows is the main text of your dissertation. You can comment out lines if you want to exclude them from your document for drafts. Everything after \mainmatter will get Arabic numbers centered on the bottom of the page.
+
+\mainmatter
+
+% I use subdirectories for each part of my dissertation just to keep the files tidy. LaTeX generates a lot of different files for output, and using subdirectories allows you to find your .tex files more easily.
+
+\include{./Chapters/History}% Done X
+\include{./Chapters/Electromagnetism} % Done X
+\include{./Chapters/DGFs} % Done X
+\include{./Chapters/NFRHT_spherical} % Done X
+\include{./Chapters/NFRHT_spherical_results} % Done X
+\include{./Chapters/Summary} % Done X
+
+\appendix
+
+\SingleSpacing
+\bibliography{./library}
+
+\DoubleSpacing
+\include{./Appendices/FresnelCoefficients} % Done X
+\include{./Appendices/ClassicalRadiativeTransfer} % Done X
+\include{./Appendices/MathematicalRelations} % Done X
+\include{./Appendices/MieCoefficients} % Done X
+\include{./Appendices/LinearSystem} % Done X
+\include{./Appendices/SCUFFEM}
+
+\end{document}

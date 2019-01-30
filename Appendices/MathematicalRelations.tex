@@ -1,0 +1,245 @@
+\chapter[Potpourri of Mathematical Relations][Potpourri of Mathematical Relations]{Potpourri of Mathematical Relations} \label{ap:Math} \raggedbottom
+%
+Below I include a number of mathematical relations which have proven useful to the work contained within this document, mostly uncited. Proof, as they say, is left as an exercise to the reader.
+
+%\section{Dyadic Green's Functions}
+%
+%\subsection{Reciprocity Relations}
+%\begin{subequations}
+%\begin{align}
+%& \mu(\boldsymbol{r}) \overline{\overline{\boldsymbol{G}}}_{e}(\boldsymbol{r}; \widetilde{\boldsymbol{r}}) = \mu(\widetilde{\boldsymbol{r}}) \overline{\overline{\boldsymbol{G}}}_{e}^{T}(\widetilde{\boldsymbol{r}}; \boldsymbol{r}) \\
+%& \varepsilon(\boldsymbol{r}) \overline{\overline{\boldsymbol{G}}}_{m}(\boldsymbol{r}; \widetilde{\boldsymbol{r}}) = \varepsilon(\widetilde{\boldsymbol{r}}) \overline{\overline{\boldsymbol{G}}}_{m}^{T}(\widetilde{\boldsymbol{r}}; \boldsymbol{r}) \\
+%& \overline{\overline{\boldsymbol{G}}}_{e}(\boldsymbol{r}; \widetilde{\boldsymbol{r}}) = \overline{\overline{\boldsymbol{G}}}_{M}^{T}(\widetilde{\boldsymbol{r}}; \boldsymbol{r})
+%\end{align}
+%\end{subequations}
+
+\section{Vector Spherical Waves}
+
+\subsection{Definitions}
+%
+\begin{subequations}
+\begin{align}
+\boldsymbol{M}_{l m}^{(p)}(k \boldsymbol{r}) = & z_{l}^{(p)}(kr) \boldsymbol{V}_{lm}^{(2)}(\theta, \phi),
+\\
+\boldsymbol{N}_{l m}^{(p)}(k \boldsymbol{r}) = & \zeta_{l}^{(p)}(kr) \boldsymbol{V}_{lm}^{(3)}(\theta, \phi) + \frac{\sqrt{l(l+1)}}{kr} z_{l}^{(p)}(kr) \boldsymbol{V}_{lm}^{(1)}(\theta, \phi),
+\end{align}
+\end{subequations}
+
+\subsection{Surface Integral Relations}
+%
+\begin{subequations}
+\begin{align}
+\oint_{S} \boldsymbol{\widehat{r}} \cdot \left[ \boldsymbol{M}_{lm}^{(u)}(k_{f} \boldsymbol{r}) \times \boldsymbol{M}_{pq}^{(v)*}(k_{f} \boldsymbol{r}) \right] d\boldsymbol{r} &= 0,
+\\
+\oint_{S} \boldsymbol{\widehat{r}} \cdot \left[ \boldsymbol{N}_{lm}^{(u)}(k_{f} \boldsymbol{r}) \times \boldsymbol{N}_{pq}^{(v)*}(k_{f} \boldsymbol{r}) \right] d\boldsymbol{r} &= 0,
+\\
+\oint_{S} \boldsymbol{\widehat{r}} \cdot \left[ \boldsymbol{M}_{lm}^{(u)}(k_{f}\boldsymbol{r}) \times \boldsymbol{N}_{pq}^{(v)*}(k_{f} \boldsymbol{r}) \right] d\boldsymbol{r} &= r^2 z_{l}^{(u)}(k_{f} r) \zeta_{p}^{(v)*}(k_{f} r) \delta_{lp} \delta_{mq},
+\\
+\oint_{S} \boldsymbol{\widehat{r}} \cdot \left[ \boldsymbol{N}_{lm}^{(v)}(k_{f}\boldsymbol{r}) \times \boldsymbol{M}_{pq}^{(v)*}(k_{f} \boldsymbol{r}) \right] d\boldsymbol{r} &= - r^2 \zeta_{l}^{(u)}(k_{f} r) z_{p}^{(v)*}(k_{f} r) \delta_{lp} \delta_{mq},
+\end{align}
+\end{subequations}
+
+\section{Vector Spherical Harmonics}
+
+\subsection{Definitions}
+%
+\begin{subequations}
+\begin{align}
+\boldsymbol{V}_{lm}^{(1)}(\theta, \phi) &= Y_{lm}(\theta, \phi) \boldsymbol{\widehat{r}}
+\\
+\begin{split}
+\boldsymbol{V}_{lm}^{(2)}(\theta, \phi) &= \frac{r}{\sqrt{l(l+1)}} \boldsymbol{\nabla} Y_{lm}(\theta, \phi) \times \boldsymbol{\widehat{r}}
+\\
+&= \frac{1}{\sqrt{l(l+1)}} \left( \frac{im}{\sin{\theta}}Y_{lm}(\theta, \phi) \boldsymbol{\widehat{\theta}} - \frac{\partial}{\partial \theta} Y_{lm}(\theta, \phi) \boldsymbol{\widehat{\phi}} \right)
+\end{split}
+\\
+\begin{split}
+\boldsymbol{V}_{lm}^{(3)}(\theta, \phi) &= \frac{r}{\sqrt{l(l+1)}} \boldsymbol{\nabla} Y_{lm}(\theta, \phi)
+\\
+&= \frac{1}{\sqrt{l(l+1)}} \left( \frac{\partial}{\partial \theta} Y_{lm}(\theta, \phi) \boldsymbol{\widehat{\theta}} + \frac{im}{\sin{\theta}}Y_{lm}(\theta, \phi) \boldsymbol{\widehat{\phi}} \right)
+\end{split}
+\end{align}
+\end{subequations}
+
+\subsection{Properties}
+%
+\begin{subequations}
+\begin{align}
+\left( \boldsymbol{V}_{lm}^{(1)}(\theta, \phi) \right)^{*} &= (-1)^{-m} \boldsymbol{V}_{l,-m}^{(1)}(\theta, \phi)
+\\
+\left( \boldsymbol{V}_{lm}^{(2)}(\theta, \phi) \right)^{*} &= (-1)^{-m} \boldsymbol{V}_{l,-m}^{(2)}(\theta, \phi) 
+\\
+\left( \boldsymbol{V}_{lm}^{(3)}(\theta, \phi) \right)^{*} &= (-1)^{-m} \boldsymbol{V}_{l,-m}^{(3)}(\theta, \phi) 
+\end{align}
+\end{subequations}
+
+\begin{subequations}
+\begin{align}
+\widehat{\boldsymbol{r}} \times \boldsymbol{V}_{lm}^{(1)}(\theta, \phi) &= 0
+\\
+\widehat{\boldsymbol{r}} \times \boldsymbol{V}_{lm}^{(2)}(\theta, \phi) &= \boldsymbol{V}_{lm}^{(3)}(\theta, \phi)
+\\
+\widehat{\boldsymbol{r}} \times \boldsymbol{V}_{lm}^{(3)}(\theta, \phi) &= - \boldsymbol{V}_{l,-m}^{(2)}(\theta, \phi) 
+\end{align}
+\end{subequations}
+
+\subsection{Surface Integral Relations}
+%
+\begin{subequations}
+\begin{align}
+\oint_{\Omega} \widehat{\boldsymbol{r}} \cdot \left[ \boldsymbol{V}_{lm}^{(s)}(\theta, \phi) \times \boldsymbol{V}_{pq}^{(s)*}(\theta, \phi) \right] d\Omega
+&= 0
+\\
+\oint_{\Omega} \widehat{\boldsymbol{r}} \cdot \left[ \boldsymbol{V}_{lm}^{(2)}(\theta, \phi) \times \boldsymbol{V}_{pq}^{(3)*}(\theta, \phi) \right] d\Omega
+&= \delta_{lp} \delta_{mq}
+\\
+\oint_{\Omega} \widehat{\boldsymbol{r}} \cdot \left[ \boldsymbol{V}_{lm}^{(3)}(\theta, \phi) \times \boldsymbol{V}_{pq}^{(2)*}(\theta, \phi) \right] d\Omega
+&= - \delta_{lp} \delta_{mq}
+\end{align}
+\end{subequations}
+
+\section{Spherical Bessel Functions}
+
+\subsection{Definitions}
+
+\begin{subequations}
+\begin{align}
+z_{n}^{(1)}(x) &= \sqrt{ \frac{\pi}{2x} } J_{n + \frac{1}{2}}(x)
+\\
+z_{n}^{(2)}(x) &= \sqrt{ \frac{\pi}{2x} } Y_{n + \frac{1}{2}}(x)
+\\
+z_{n}^{(3)}(x) &= \sqrt{ \frac{\pi}{2x} } H_{n + \frac{1}{2}}^{(1)}(x) = z_{n}^{(1)}(x) + i z_{n}^{(2)}(x)
+\\
+z_{n}^{(4)}(x) &= \sqrt{ \frac{\pi}{2x} } H_{n + \frac{1}{2}}^{(2)}(x) = z_{n}^{(1)}(x) - i z_{n}^{(2)}(x)
+\end{align}
+\end{subequations}
+%
+\begin{align}
+\zeta_{n}^{(p)}(x) = \frac{1}{x} \frac{d}{dx} \left[ x z_{n}^{(p)}(x) \right]
+\end{align}
+
+
+\subsection{Recurrence Relations}
+
+\begin{align}
+z_{n}^{(p)}(x) = \frac{x}{2n+1} \left( z_{n-1}^{(p)}(x) + z_{n+1}^{(p)}(x) \right)
+\end{align}
+%
+\begin{equation}
+\begin{split}
+z_{n}^{(p)\prime}(x) &= \frac{n}{2n+1} z_{n-1}^{(p)}(x) - \frac{n+1}{2n+1} z_{n+1}^{(p)}(x)
+\\
+&= z_{n-1}^{(p)}(x) - \frac{n+1}{x} z_{n}^{(p)}(x)
+\\
+&= \frac{n}{x} z_{n}^{(p)}(x) - z_{n+1}^{(p)}(x)
+\end{split}
+\end{equation}
+%
+\begin{equation}
+\begin{split}
+\frac{\zeta_{n}^{(p)}(x)}{z_{n}^{(p)}(x)}
+&= \frac{z_{n}^{(p)\prime}(x)}{z_{n}^{(p)}(x)} + \frac{1}{x}
+\\
+&= \frac{z_{n-1}^{(p)}(x)}{z_{n}^{(p)}(x)} - \frac{n}{x}
+\\
+&= - \frac{z_{n+1}^{(p)}(x)}{z_{n}^{(p)}(x)} + \frac{n+1}{x}
+\end{split}
+\end{equation}
+
+
+\subsection{Continued Fraction Expansions}
+%
+Continued fractions are defined as
+\begin{align}
+\K_{m=1}^{\infty} \left[ \frac{a_{m}}{b_{m}} \right] = \frac{ a_{1} }{ b_{1} + \frac{ a_{2} }{ b_{2} + \frac{ a_{3} }{ b_{3} + \dotsc } } }
+\end{align}
+
+Continued fraction expansions for the spherical Bessel\cite{Lentz1976} and Hankel\cite{Cuyt2008} functions are
+%
+\begin{subequations}
+\begin{align}
+\frac{z_{n-1}^{(1)}(x)}{z_{n}^{(1)}(x)} &= \frac{2n+1}{x} + \K_{m=1}^{\infty} \left[ \frac{1}{(-1)^{m}2(m + n + 1/2)x^{-1}} \right]
+\\
+\frac{z_{n+1}^{(3)}(x)}{z_{n}^{(3)}(x)} &= \frac{n + 1 + ix}{x} - \frac{1}{x} \K_{m=1}^{\infty} \left[ \frac{(n+1/2)^{2} - (2m-1)^{2}/4}{2(ix-m)} \right]
+\end{align}
+\end{subequations}
+
+\subsection{Wronskians}
+The Wronskian of two functions, $f$ and $g$, is defined as
+\begin{align}
+W(f,g) = f g' - g f'
+\end{align}
+
+Wronskians can be used to determine if functions are linearly independent. If $f$ and $g$ are analytic, a vanishing Wronskian implies that $f$ and $g$ are linearly dependent. Wronskians have the properties
+\begin{align}
+& W(f,f) = 0
+\\
+& W(f,g) = - W(g,f)
+\\
+& W(f, g_{1} + g_{2}) = W(f,g_{1}) + W(f,g_{2})
+\end{align}
+
+The Wronskians of spherical Bessel and Hankel functions allow for useful simplifications. They are given by
+\begin{align}
+W(z_{n}^{(p)}(x), z_{n}^{(q)}(x)) = z_{n}^{(p)}(x) \zeta_{n}^{(q)}(x) - \zeta_{n}^{(p)}(x) z_{n}^{(q)}(x)
+\end{align}
+%
+and have values\cite{Olver2017}
+%
+\begin{subequations}
+\begin{align}
+W(z_{n}^{(1)}(x), z_{n}^{(2)}(x)) &= x^{-2}.
+\\
+W(z_{n}^{(1)}(x), z_{n}^{(3)}(x)) &= i x^{-2}
+\\
+W(z_{n}^{(1)}(x), z_{n}^{(4)}(x)) &= -i x^{-2}
+\\
+W(z_{n}^{(2)}(x), z_{n}^{(3)}(x)) &= - x^{-2}
+\\
+W(z_{n}^{(2)}(x), z_{n}^{(4)}(x)) &= - x^{-2}
+\\
+W(z_{n}^{(3)}(x), z_{n}^{(4)}(x)) &= -2 i x^{-2}
+\end{align}
+\end{subequations}
+
+\subsection{Asymptotic Approximations}
+
+\begin{subequations}
+\begin{align}
+\lim_{x \rightarrow \infty} z_{n}^{(3)}(x) &= i^{-n-1} x^{-1} e^{ix}
+\\
+\lim_{x \rightarrow \infty} \zeta_{n}^{(3)}(x) &= i^{-n} x^{-1} e^{ix}
+\end{align}
+\end{subequations}
+%
+\begin{align}
+\lim_{x \rightarrow \infty} \left( z_{n}^{(3)}(x) \zeta_{n}^{(3)*}(x) \right) &= -i x^{-2}
+\end{align}
+
+\section{Miscellaneous}
+
+\subsection{Properties of Complex Numbers}
+\begin{align}
+z^{-1} &= \frac{z^{*}}{|z|^{2}} \\
+z - z^{*} &= 2 i \mathrm{Im}(z) \\
+\mathrm{Re}(iz) &= -\mathrm{Im}(z) \\
+\mathrm{Re}(iz^{*}) &= \mathrm{Im}(z)
+\end{align}
+
+\subsection{Vector and Dyad Identities}
+\begin{align}
+& \left( \boldsymbol{\nabla} \times \boldsymbol{A} \right) \cdot \overline{\overline{\boldsymbol{B}}} - \boldsymbol{A} \cdot \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} = \boldsymbol{\nabla} \left( \boldsymbol{A} \times \overline{\overline{\boldsymbol{B}}} \right)
+\\
+& \overline{\overline{\boldsymbol{A}}} = \boldsymbol{n} \left( \boldsymbol{n} \cdot \overline{\overline{\boldsymbol{A}}} \right) - \boldsymbol{n} \times \boldsymbol{n} \times \overline{\overline{\boldsymbol{A}}}
+\\
+%& \int_{V} \left[ \boldsymbol{\nabla} \times \boldsymbol{A} \cdot \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} - \boldsymbol{A} \cdot \left( \boldsymbol{\nabla} \times \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} \right) \right] dV = \oint_{S} \boldsymbol{n} \cdot \left[ \boldsymbol{A} \times \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} \right] dS
+%\\
+%& \int_{V} \left[ \left( \boldsymbol{\nabla} \times \boldsymbol{\nabla} \times \boldsymbol{A} \right) \cdot \overline{\overline{\boldsymbol{B}}} - \boldsymbol{A} \cdot \left( \boldsymbol{\nabla} \times \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} \right) \right] dV = \oint_{S} \boldsymbol{n} \cdot \left[ \boldsymbol{A} \times \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} + \left( \boldsymbol{\nabla} \times \boldsymbol{A} \right) \times \overline{\overline{\boldsymbol{B}}} \right] dS
+%\\
+%& \int_{V} \left[ \left( \boldsymbol{\nabla} \times \boldsymbol{\nabla} \times \boldsymbol{A} \right) \cdot \overline{\overline{\boldsymbol{B}}} - \boldsymbol{\nabla} \times \boldsymbol{A} \cdot \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} \right] dV = \oint_{S} \boldsymbol{n} \cdot \left[ \left( \boldsymbol{\nabla} \times \boldsymbol{A} \right) \times \overline{\overline{\boldsymbol{B}}} \right] dS
+%\\
+& \int_{V} \left[ \left( \boldsymbol{\nabla} \times \boldsymbol{A} \right) \cdot \overline{\overline{\boldsymbol{B}}} - \boldsymbol{A} \cdot \boldsymbol{\nabla} \times \overline{\overline{\boldsymbol{B}}} \right] dV = \oint_{S} \boldsymbol{n} \cdot \left[ \boldsymbol{A} \times \overline{\overline{\boldsymbol{B}}} \right] dS
+\end{align}
+
+
+
